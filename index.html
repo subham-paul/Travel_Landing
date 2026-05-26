@@ -1,0 +1,2771 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WanderNext – Luxury Travel Experiences</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <!-- Swiper CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet" />
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+  <style>
+    :root {
+      --ocean-deep: #0a1628;
+      --ocean-mid: #0d2444;
+      --ocean-teal: #0e6e72;
+      --ocean-light: #1a9fa6;
+      --gold: #c9a84c;
+      --gold-light: #e8c96a;
+      --cream: #f8f3e8;
+      --white: #ffffff;
+      --glass-bg: rgba(255, 255, 255, 0.07);
+      --glass-border: rgba(255, 255, 255, 0.15);
+      --card-bg: rgba(10, 22, 40, 0.85);
+      --text-muted-c: rgba(255, 255, 255, 0.6);
+      --radius: 18px;
+      --radius-sm: 10px;
+      --transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--ocean-deep);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--ocean-deep);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--gold);
+      border-radius: 3px;
+    }
+
+    /* ─── TYPOGRAPHY ─── */
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .display-title {
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -1px;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 600;
+    }
+
+    .gold-text {
+      color: var(--gold);
+    }
+
+    .teal-text {
+      color: var(--ocean-light);
+    }
+
+    .label-tag {
+      display: inline-block;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(201, 168, 76, 0.4);
+      padding: 5px 16px;
+      border-radius: 40px;
+      margin-bottom: 14px;
+      background: rgba(201, 168, 76, 0.08);
+    }
+
+    /* ─── NAVBAR ─── */
+    #mainNav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 18px 0;
+      transition: all 0.4s ease;
+    }
+
+    #mainNav.scrolled {
+      background: rgba(10, 22, 40, 0.96) !important;
+      backdrop-filter: blur(20px);
+      padding: 12px 0;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+      border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+    }
+
+    .navbar-brand .brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 1px;
+    }
+
+    .navbar-brand .brand-name span {
+      color: var(--gold);
+    }
+
+    .nav-link {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.8) !important;
+      padding: 8px 16px !important;
+      transition: color var(--transition);
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 50%;
+      width: 0;
+      height: 1.5px;
+      background: var(--gold);
+      transition: all var(--transition);
+      transform: translateX(-50%);
+    }
+
+    .nav-link:hover {
+      color: var(--gold) !important;
+    }
+
+    .nav-link:hover::after {
+      width: 60%;
+    }
+
+    .nav-cta {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--ocean-deep) !important;
+      border-radius: 40px;
+      padding: 8px 22px !important;
+      font-weight: 700;
+      transition: all var(--transition);
+    }
+
+    .nav-cta::after {
+      display: none;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(201, 168, 76, 0.4);
+    }
+
+    .navbar-toggler {
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .navbar-toggler-icon {
+      filter: invert(1);
+    }
+
+    /* ─── BUTTONS ─── */
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--ocean-deep);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 50px;
+      padding: 14px 34px;
+      transition: all var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-gold::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(201, 168, 76, 0.5);
+    }
+
+    .btn-gold:hover::before {
+      opacity: 1;
+    }
+
+    .btn-gold span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-outline-light-custom {
+      background: transparent;
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border: 1.5px solid rgba(255, 255, 255, 0.5);
+      border-radius: 50px;
+      padding: 13px 34px;
+      transition: all var(--transition);
+    }
+
+    .btn-outline-light-custom:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--white);
+      transform: translateY(-3px);
+    }
+
+    /* ─── GLASS CARD ─── */
+    .glass {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+    }
+
+    /* ─── SECTIONS ─── */
+    section {
+      position: relative;
+    }
+
+    .section-pad {
+      padding: 100px 0;
+    }
+
+    .section-pad-sm {
+      padding: 70px 0;
+    }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh;
+      background:
+        linear-gradient(180deg, rgba(10, 22, 40, 0.3) 0%, rgba(10, 22, 40, 0.7) 60%, var(--ocean-deep) 100%),
+        /* url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=80') center/cover no-repeat fixed; */
+        url('./assets/hero1_converter.gif') center/cover no-repeat fixed;
+      display: flex;
+      align-items: center;
+      padding-top: 15px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(201, 168, 76, 0.15);
+      border: 1px solid rgba(201, 168, 76, 0.35);
+      border-radius: 40px;
+      padding: 7px 18px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: var(--gold-light);
+      margin-bottom: 24px;
+    }
+
+    .hero-badge .dot {
+      width: 7px;
+      height: 7px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1)
+      }
+
+      50% {
+        opacity: 0.5;
+        transform: scale(1.4)
+      }
+    }
+
+    .hero-search-bar {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 60px;
+      padding: 8px 8px 8px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      max-width: 720px;
+      margin-top: 38px;
+    }
+
+    .search-field {
+      flex: 1;
+      min-width: 120px;
+      background: none;
+      border: none;
+      outline: none;
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.88rem;
+      padding: 8px 12px;
+    }
+
+    .search-field::placeholder {
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    .search-divider {
+      width: 1px;
+      height: 30px;
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .search-btn {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--ocean-deep);
+      border: none;
+      border-radius: 40px;
+      padding: 12px 26px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all var(--transition);
+      white-space: nowrap;
+    }
+
+    .search-btn:hover {
+      transform: scale(1.04);
+      box-shadow: 0 8px 25px rgba(201, 168, 76, 0.4);
+    }
+
+    .floating-stats {
+      position: absolute;
+      bottom: 50px;
+      right: 50px;
+      display: flex;
+      gap: 16px;
+    }
+
+    .stat-pill {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      padding: 16px 22px;
+      text-align: center;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .stat-pill:nth-child(2) {
+      animation-delay: 1.5s;
+    }
+
+    .stat-pill:nth-child(3) {
+      animation-delay: 3s;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0)
+      }
+
+      50% {
+        transform: translateY(-10px)
+      }
+    }
+
+    .stat-num {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--gold);
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* ─── TRUSTED STATS ─── */
+    #stats {
+      background: linear-gradient(135deg, var(--ocean-mid), #071830);
+      border-top: 1px solid rgba(201, 168, 76, 0.15);
+      border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .stat-big {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.2rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .stat-sub {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted-c);
+      margin-top: 6px;
+    }
+
+    .stat-icon {
+      font-size: 1.6rem;
+      color: var(--ocean-light);
+      margin-bottom: 10px;
+    }
+
+    /* ─── DESTINATION CARDS ─── */
+    .dest-card {
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+      transition: all var(--transition);
+      cursor: pointer;
+    }
+
+    .dest-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .dest-card img {
+      width: 100%;
+      height: 360px;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .dest-card:hover img {
+      transform: scale(1.08);
+    }
+
+    .dest-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(10, 22, 40, 0.95) 0%, rgba(10, 22, 40, 0.4) 50%, transparent 100%);
+    }
+
+    .dest-card-body {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 20px;
+    }
+
+    .dest-badge {
+      background: rgba(201, 168, 76, 0.2);
+      border: 1px solid rgba(201, 168, 76, 0.4);
+      color: var(--gold-light);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border-radius: 20px;
+      padding: 3px 10px;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+
+    .dest-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+      line-height: 1.2;
+    }
+
+    .dest-desc {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .dest-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .dest-rating {
+      font-size: 0.75rem;
+      color: var(--gold);
+    }
+
+    .dest-price {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .dest-price span {
+      font-size: 0.68rem;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .dest-cta {
+      display: block;
+      width: 100%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--ocean-deep);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-align: center;
+      border: none;
+      border-radius: 30px;
+      padding: 9px 0;
+      margin-top: 12px;
+      transition: all var(--transition);
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .dest-cta:hover {
+      box-shadow: 0 8px 20px rgba(201, 168, 76, 0.5);
+      transform: scale(1.02);
+      color: var(--ocean-deep);
+    }
+
+    /* ─── SECTION BACKGROUNDS ─── */
+    #indian-dest {
+      background: linear-gradient(180deg, var(--ocean-deep) 0%, #071830 50%, var(--ocean-deep) 100%);
+    }
+
+    #intl-dest {
+      background: linear-gradient(180deg, var(--ocean-deep) 0%, #060f20 50%, var(--ocean-deep) 100%);
+      position: relative;
+    }
+
+    #intl-dest::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1920&q=30') center/cover no-repeat fixed;
+      opacity: 0.04;
+    }
+
+    /* ─── WHY CHOOSE US ─── */
+    #why {
+      background: linear-gradient(135deg, var(--ocean-mid) 0%, #071830 100%);
+    }
+
+    .why-card {
+      padding: 36px 28px;
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all var(--transition);
+      height: 100%;
+    }
+
+    .why-card:hover {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(201, 168, 76, 0.3);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .why-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, rgba(201, 168, 76, 0.2), rgba(201, 168, 76, 0.05));
+      border: 1px solid rgba(201, 168, 76, 0.3);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .why-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .why-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted-c);
+      line-height: 1.7;
+    }
+
+    /* ─── TRAVEL CATEGORIES ─── */
+    #categories {
+      background: var(--ocean-deep);
+    }
+
+    .cat-card {
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+      height: 200px;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .cat-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .cat-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .cat-card:hover img {
+      transform: scale(1.1);
+    }
+
+    .cat-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(10, 22, 40, 0.88) 0%, rgba(10, 22, 40, 0.2) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+    }
+
+    .cat-icon {
+      font-size: 1.6rem;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+
+    .cat-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .cat-count {
+      font-size: 0.72rem;
+      color: var(--text-muted-c);
+    }
+
+    /* ─── PACKAGES ─── */
+    #packages {
+      background: linear-gradient(180deg, var(--ocean-deep) 0%, #071830 100%);
+    }
+
+    .pkg-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: all var(--transition);
+    }
+
+    .pkg-card:hover {
+      border-color: rgba(201, 168, 76, 0.3);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    }
+
+    .pkg-img {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .pkg-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .pkg-card:hover .pkg-img img {
+      transform: scale(1.08);
+    }
+
+    .pkg-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: var(--gold);
+      color: var(--ocean-deep);
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-radius: 20px;
+      padding: 4px 12px;
+    }
+
+    .pkg-body {
+      padding: 22px;
+    }
+
+    .pkg-name {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .pkg-meta {
+      display: flex;
+      gap: 16px;
+      font-size: 0.75rem;
+      color: var(--text-muted-c);
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .pkg-meta i {
+      color: var(--ocean-light);
+      margin-right: 4px;
+    }
+
+    .pkg-features {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 16px;
+    }
+
+    .pkg-features li {
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.75);
+      padding: 3px 0;
+    }
+
+    .pkg-features li::before {
+      content: '✓ ';
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .pkg-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .pkg-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .pkg-price small {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.7rem;
+      color: var(--text-muted-c);
+      font-weight: 400;
+      display: block;
+    }
+
+    /* ─── TESTIMONIALS ─── */
+    #testimonials {
+      background: linear-gradient(135deg, #071830 0%, var(--ocean-mid) 100%);
+      overflow: hidden;
+    }
+
+    .testi-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius);
+      padding: 32px;
+      margin: 10px;
+      transition: all var(--transition);
+      height: 100%;
+    }
+
+    .testi-card:hover {
+      border-color: rgba(201, 168, 76, 0.3);
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .testi-quote {
+      font-size: 2rem;
+      color: var(--gold);
+      opacity: 0.4;
+      margin-bottom: 12px;
+    }
+
+    .testi-text {
+      font-size: 0.88rem;
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.8;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .testi-stars {
+      color: var(--gold);
+      font-size: 0.8rem;
+      margin-bottom: 16px;
+    }
+
+    .testi-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .testi-avatar {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--gold);
+    }
+
+    .testi-name {
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .testi-dest {
+      font-size: 0.72rem;
+      color: var(--ocean-light);
+    }
+
+    /* ─── GALLERY ─── */
+    #gallery {
+      background: var(--ocean-deep);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, 220px);
+      gap: 12px;
+    }
+
+    .gallery-item {
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .gallery-item:nth-child(1) {
+      grid-column: 1/3;
+      grid-row: 1/2;
+    }
+
+    .gallery-item:nth-child(5) {
+      grid-column: 3/5;
+      grid-row: 2/3;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.08);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 22, 40, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    .gallery-zoom {
+      font-size: 1.8rem;
+      color: var(--gold);
+    }
+
+    /* ─── FAQ ─── */
+    #faq {
+      background: linear-gradient(180deg, var(--ocean-deep) 0%, #071830 100%);
+    }
+
+    .accordion-item {
+      background: rgba(255, 255, 255, 0.04) !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      border-radius: var(--radius-sm) !important;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+
+    .accordion-button {
+      background: transparent !important;
+      color: var(--white) !important;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 18px 22px;
+      box-shadow: none !important;
+    }
+
+    .accordion-button::after {
+      filter: invert(0.8) sepia(1) saturate(2) hue-rotate(5deg);
+    }
+
+    .accordion-button:not(.collapsed) {
+      color: var(--gold) !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .accordion-body {
+      background: transparent;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.85rem;
+      line-height: 1.8;
+      padding: 16px 22px;
+    }
+
+    /* ─── NEWSLETTER ─── */
+    #newsletter {
+      background:
+        linear-gradient(135deg, rgba(10, 22, 40, 0.9), rgba(14, 110, 114, 0.4)),
+        url('https://images.unsplash.com/photo-1530789253388-582c481c54b0?w=1920&q=60') center/cover no-repeat fixed;
+      padding: 90px 0;
+    }
+
+    .newsletter-box {
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 24px;
+      padding: 50px 50px;
+    }
+
+    .newsletter-input {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--white);
+      border-radius: 50px;
+      padding: 14px 22px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.88rem;
+      flex: 1;
+      outline: none;
+      transition: all var(--transition);
+    }
+
+    .newsletter-input:focus {
+      border-color: var(--gold);
+      background: rgba(255, 255, 255, 0.13);
+    }
+
+    .newsletter-input::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* ─── FOOTER ─── */
+    #footer {
+      background: #060e1a;
+      border-top: 1px solid rgba(201, 168, 76, 0.15);
+      padding: 70px 0 0;
+    }
+
+    .footer-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    .footer-brand span {
+      color: var(--gold);
+    }
+
+    .footer-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted-c);
+      line-height: 1.8;
+      margin-top: 14px;
+      margin-bottom: 22px;
+    }
+
+    .footer-socials a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 50%;
+      color: var(--white);
+      font-size: 0.9rem;
+      transition: all var(--transition);
+      margin-right: 8px;
+    }
+
+    .footer-socials a:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--ocean-deep);
+      transform: translateY(-3px);
+    }
+
+    .footer-heading {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      font-size: 0.82rem;
+      color: var(--text-muted-c);
+      text-decoration: none;
+      transition: color var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer-links a i {
+      font-size: 0.65rem;
+      color: var(--ocean-light);
+    }
+
+    .footer-links a:hover {
+      color: var(--white);
+    }
+
+    .footer-contact {
+      font-size: 0.82rem;
+      color: var(--text-muted-c);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .footer-contact i {
+      color: var(--gold);
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
+    .footer-bottom {
+      margin-top: 50px;
+      padding: 20px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--text-muted-c);
+    }
+
+    .footer-bottom a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    /* ─── SWIPER CUSTOM ─── */
+    .swiper-button-next,
+    .swiper-button-prev {
+      color: var(--gold) !important;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      width: 46px !important;
+      height: 46px !important;
+      border-radius: 50%;
+    }
+
+    .swiper-button-next::after,
+    .swiper-button-prev::after {
+      font-size: 1rem !important;
+    }
+
+    .swiper-pagination-bullet {
+      background: rgba(255, 255, 255, 0.4) !important;
+    }
+
+    .swiper-pagination-bullet-active {
+      background: var(--gold) !important;
+    }
+
+    /* ─── BACK TO TOP ─── */
+    #backToTop {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 46px;
+      height: 46px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--ocean-deep);
+      border: none;
+      border-radius: 50%;
+      font-size: 1rem;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 900;
+      transition: all var(--transition);
+      box-shadow: 0 6px 20px rgba(201, 168, 76, 0.4);
+    }
+
+    #backToTop:hover {
+      transform: translateY(-4px);
+    }
+
+    #backToTop.show {
+      display: flex;
+    }
+
+    /* ─── PARALLAX DIVIDER ─── */
+    .parallax-divider {
+      height: 320px;
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .parallax-divider::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(10, 22, 40, 0.85), rgba(14, 110, 114, 0.45));
+    }
+
+    .parallax-content {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 992px) {
+      .floating-stats {
+        position: static;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 40px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto;
+      }
+
+      .gallery-item:nth-child(1),
+      .gallery-item:nth-child(5) {
+        grid-column: auto;
+        grid-row: auto;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-search-bar {
+        border-radius: 16px;
+        flex-direction: column;
+        padding: 16px;
+      }
+
+      .search-divider {
+        display: none;
+      }
+
+      .search-btn {
+        width: 100%;
+      }
+
+      .newsletter-box {
+        padding: 32px 22px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 576px) {
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* Loading animation */
+    .page-loader {
+      position: fixed;
+      inset: 0;
+      background: var(--ocean-deep);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+
+    .page-loader.hide {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loader-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--white);
+      animation: loaderPulse 1.2s ease-in-out infinite;
+    }
+
+    .loader-brand span {
+      color: var(--gold);
+    }
+
+    @keyframes loaderPulse {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: 0.3
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- PAGE LOADER -->
+  <div class="page-loader" id="pageLoader">
+    <div class="loader-brand">Wander<span>Next</span></div>
+  </div>
+
+  <!-- BACK TO TOP -->
+  <button id="backToTop" aria-label="Back to top"><i class="bi bi-arrow-up"></i></button>
+
+  <!-- ══════════════════════ NAVBAR ══════════════════════ -->
+  <nav class="navbar navbar-expand-lg" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <span class="brand-name"><i class="bi bi-compass me-1"></i> Wander<span>Next</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+          <li class="nav-item"><a class="nav-link" href="#indian-dest">India</a></li>
+          <li class="nav-item"><a class="nav-link" href="#intl-dest">International</a></li>
+          <li class="nav-item"><a class="nav-link" href="#packages">Packages</a></li>
+          <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+          <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+          <li class="nav-item ms-lg-2"><a class="nav-link nav-cta" href="#newsletter">Book Now</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════ HERO ══════════════════════ -->
+  <section id="hero">
+    <div class="container position-relative">
+      <div class="row align-items-center min-vh-100 py-5">
+        <div class="col-lg-8">
+          <div class="hero-badge"><span class="dot"></span> Premium Travel Experiences Since 2015</div>
+          <h1 class="display-title text-white mb-3">
+            Explore The World's<br>
+            <em class="gold-text">Hidden Wonders</em>
+          </h1>
+          <p class="text-white-50 mb-4" style="font-size:1rem; line-height:1.8; max-width:520px;">
+            Curated luxury journeys to the most extraordinary destinations on Earth. Where every voyage becomes a
+            timeless story.
+          </p>
+          <div class="d-flex gap-3 flex-wrap">
+            <a href="#packages" class="btn-gold"><span>Explore Packages <i
+                  class="bi bi-arrow-right ms-1"></i></span></a>
+            <a href="#gallery" class="btn-outline-light-custom">View Gallery</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- FLOATING STATS -->
+      <div class="floating-stats">
+        <div class="stat-pill">
+          <span class="stat-num">50K+</span>
+          <span class="stat-label">Happy Clients</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-num">120+</span>
+          <span class="stat-label">Destinations</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-num">4.9★</span>
+          <span class="stat-label">Avg Rating</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ TRUSTED STATS ══════════════════════ -->
+  <section id="stats" class="section-pad-sm">
+    <div class="container">
+      <div class="row text-center g-4">
+        <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="0">
+          <div class="stat-item">
+            <div class="stat-icon"><i class="bi bi-globe2"></i></div>
+            <div class="stat-big">120+</div>
+            <div class="stat-sub">Countries Covered</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="100">
+          <div class="stat-item">
+            <div class="stat-icon"><i class="bi bi-people-fill"></i></div>
+            <div class="stat-big">50K+</div>
+            <div class="stat-sub">Happy Travelers</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="200">
+          <div class="stat-item">
+            <div class="stat-icon"><i class="bi bi-award-fill"></i></div>
+            <div class="stat-big">35+</div>
+            <div class="stat-sub">Industry Awards</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="300">
+          <div class="stat-item">
+            <div class="stat-icon"><i class="bi bi-star-fill"></i></div>
+            <div class="stat-big">4.9★</div>
+            <div class="stat-sub">Average Rating</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ INDIAN DESTINATIONS ══════════════════════ -->
+  <section id="indian-dest" class="section-pad">
+    <div class="container">
+      <div class="text-center mb-5" data-aos="fade-up">
+        <div class="label-tag"><i class="bi bi-geo-alt me-1"></i> Incredible India</div>
+        <h2 class="section-title text-white">Popular Indian <span class="gold-text">Destinations</span></h2>
+        <p class="text-white-50 mt-3" style="max-width:560px; margin: auto; font-size:0.88rem; line-height:1.8;">From
+          the snow-capped Himalayas to sun-kissed beaches — discover India's breathtaking diversity.</p>
+      </div>
+      <div class="row g-4">
+
+        <!-- 1. Goa -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
+          <div class="dest-card">
+            <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=600&q=80" alt="Goa" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-body">
+              <div class="dest-badge">Beach Paradise</div>
+              <div class="dest-name">Goa</div>
+              <div class="dest-desc">Golden shores, vibrant nightlife, and Portuguese heritage on India's western coast.
+              </div>
+              <div class="dest-meta">
+                <div class="dest-rating"><i class="bi bi-star-fill"></i> 4.8 (2.1k)</div>
+                <div class="dest-price">₹18,999 <span>/ person</span></div>
+              </div>
+              <a href="#" class="dest-cta">Explore Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Jaipur -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="80">
+          <div class="dest-card">
+            <img src="https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?w=600&q=80" alt="Jaipur" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-body">
+              <div class="dest-badge">Pink City</div>
+              <div class="dest-name">Jaipur</div>
+              <div class="dest-desc">Majestic forts, palatial havelis, and the royal grandeur of Rajasthan's capital.
+              </div>
+              <div class="dest-meta">
+                <div class="dest-rating"><i class="bi bi-star-fill"></i> 4.7 (1.8k)</div>
+                <div class="dest-price">₹14,999 <span>/ person</span></div>
+              </div>
+              <a href="#" class="dest-cta">Explore Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Kashmir -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="160">
+          <div class="dest-card">
+            <img src="https://images.unsplash.com/photo-1548013146-72479768bada?w=600&q=80" alt="Kashmir" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-body">
+              <div class="dest-badge">Paradise Valley</div>
+              <div class="dest-name">Kashmir</div>
+              <div class="dest-desc">Dal Lake houseboats, Mughal gardens, and snow-draped Himalayan peaks.</div>
+              <div class="dest-meta">
+                <div class="dest-rating"><i class="bi bi-star-fill"></i> 4.9 (3.2k)</div>
+                <div class="dest-price">₹22,999 <span>/ person</span></div>
+              </div>
+              <a href="#" class="dest-cta">Explore Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Leh Ladakh -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
+          <div class="dest-card">
+            <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=600&q=80" alt="Leh Ladakh" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-body">
+              <div class="dest-badge">High Altitude</div>
+              <div class="dest-name">Leh Ladakh</div>
+              <div class="dest-desc">Surreal moonscapes, azure Pangong Tso lake, and ancient Tibetan monasteries.</div>
+              <div class="dest-meta">
+                <div class="dest-rating"><i class="bi bi-star-fill"></i> 4.9 (2.7k)</div>
+                <div class="dest-price">₹28,999 <span>/ person</span></div>
+              </div>
+              <a href="#" class="dest-cta">Explore Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Manali -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="80">
+          <div class="dest-card">
+            <img src="https://images.pexels.com/photos/6496159/pexels-photo-6496159.jpeg" alt="Manali" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-body">
+              <div class="dest-badge">Hill Station</div>
+              <div class="dest-name">Manali</div>
+              <div class="dest-desc">Adventure capital of the Himalayas with skiing, paragliding, and apple orchards.
+              </div>
+              <div class="dest-meta">
+                <div class="dest-rating"><i class="bi bi-star-fill"></i> 4.7 (1.9k)</div>
+                <div class="dest-price">₹16,999 <span>/ person</span></div>
+              </div>
+              <a href="#" class="dest-cta">Explore Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. Shimla -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="160">
+          <div class="dest-card">
+            <img src="https://images.pexels.com/photos/32464426/pexels-photo-32464426.jpeg?w=600&q=80" alt="Shimla" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-body">
+              <div class="dest-badge">Queen of Hills</div>
+              <div class="dest-name">Shimla</div>
+              <div class="dest-desc">Colonial-era charm meets cedar forests and the famous toy train experience.</div>
+              <div class="dest-meta">
+                <div class="dest-rating"><i class="bi bi-star-fill"></i> 4.6 (1.5k)</div>
+                <div class="dest-price">₹13,999 <span>/ person</span></div>
+              </div>
+              <a href="#" class="dest-cta">Explore Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. Kerala -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
+          <div class="dest-card">
+            <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=600&q=80" alt="Kerala" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-body">
+              <div class="dest-badge">God's Own Country</div>
+              <div class="dest-name">Kerala</div>
+              <div class="dest-desc">Serene backwaters, Ayurvedic retreats, and lush tea plantations of the Malabar.
+              </div>
+              <div class="dest-meta">
+                <div class="dest-rating"><i class="bi bi-star-fill"></i> 4.8 (2.4k)</div>
+                <div class="dest-price">₹19,999 <span>/ person</span></div>
+              </div>
+              <a href="#" class="dest-cta">Explore Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. Varanasi -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="80">
+          <div class="dest-card">
+            <img src="https://images.pexels.com/photos/12112985/pexels-photo-12112985.jpeg?w=600&q=80" alt="Varanasi" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-body">
+              <div class="dest-badge">Spiritual Capital</div>
+              <div class="dest-name">Varanasi</div>
+              <div class="dest-desc">The oldest living city on earth where ancient ghats meet sacred Ganga rituals.
+              </div>
+              <div class="dest-meta">
+                <div class="dest-rating"><i class="bi bi-star-fill"></i> 4.7 (2.0k)</div>
+                <div class="dest-price">₹11,999 <span>/ person</span></div>
+              </div>
+              <a href="#" class="dest-cta">Explore Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9. Andaman -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="160">
+          <div class="dest-card">
+            <img src="https://images.unsplash.com/photo-1559494007-9f5847c49d94?w=600&q=80" alt="Andaman" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-body">
+              <div class="dest-badge">Island Gems</div>
+              <div class="dest-name">Andaman Islands</div>
+              <div class="dest-desc">Emerald waters, pristine Radhanagar Beach, and vivid coral reef ecosystems.</div>
+              <div class="dest-meta">
+                <div class="dest-rating"><i class="bi bi-star-fill"></i> 4.9 (1.6k)</div>
+                <div class="dest-price">₹25,999 <span>/ person</span></div>
+              </div>
+              <a href="#" class="dest-cta">Explore Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10. Rishikesh -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
+          <div class="dest-card">
+            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80" alt="Rishikesh" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-body">
+              <div class="dest-badge">Yoga Capital</div>
+              <div class="dest-name">Rishikesh</div>
+              <div class="dest-desc">White-water rafting on the Ganges and yoga ashrams in the Himalayan foothills.
+              </div>
+              <div class="dest-meta">
+                <div class="dest-rating"><i class="bi bi-star-fill"></i> 4.8 (1.7k)</div>
+                <div class="dest-price">₹12,999 <span>/ person</span></div>
+              </div>
+              <a href="#" class="dest-cta">Explore Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 11. Agra -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="80">
+          <div class="dest-card">
+            <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?w=600&q=80" alt="Agra" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-body">
+              <div class="dest-badge">UNESCO Heritage</div>
+              <div class="dest-name">Agra</div>
+              <div class="dest-desc">The immortal Taj Mahal, Agra Fort, and Mughal architecture at its grandest.</div>
+              <div class="dest-meta">
+                <div class="dest-rating"><i class="bi bi-star-fill"></i> 4.8 (3.5k)</div>
+                <div class="dest-price">₹10,999 <span>/ person</span></div>
+              </div>
+              <a href="#" class="dest-cta">Explore Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 12. Coorg -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="160">
+          <div class="dest-card">
+            <img src="https://images.pexels.com/photos/35659936/pexels-photo-35659936.jpeg" alt="Coorg" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-body">
+              <div class="dest-badge">Scotland of India</div>
+              <div class="dest-name">Coorg</div>
+              <div class="dest-desc">Coffee plantations, misty valleys, and Kodava culture nestled in Karnataka's hills.
+              </div>
+              <div class="dest-meta">
+                <div class="dest-rating"><i class="bi bi-star-fill"></i> 4.7 (1.2k)</div>
+                <div class="dest-price">₹15,999 <span>/ person</span></div>
+              </div>
+              <a href="#" class="dest-cta">Explore Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 13. Udaipur -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
+          <div class="dest-card">
+            <img src="https://images.pexels.com/photos/17831363/pexels-photo-17831363.jpeg" alt="Udaipur" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-body">
+              <div class="dest-badge">City of Lakes</div>
+              <div class="dest-name">Udaipur</div>
+              <div class="dest-desc">Lake Pichola, opulent palace hotels, and Rajputana romance in every alley.</div>
+              <div class="dest-meta">
+                <div class="dest-rating"><i class="bi bi-star-fill"></i> 4.8 (1.9k)</div>
+                <div class="dest-price">₹17,999 <span>/ person</span></div>
+              </div>
+              <a href="#" class="dest-cta">Explore Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 14. Darjeeling -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="80">
+          <div class="dest-card">
+            <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=600&q=80" alt="Darjeeling" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-body">
+              <div class="dest-badge">Tea Highlands</div>
+              <div class="dest-name">Darjeeling</div>
+              <div class="dest-desc">Kanchenjunga sunrises, colonial toy train, and world-famous tea estates.</div>
+              <div class="dest-meta">
+                <div class="dest-rating"><i class="bi bi-star-fill"></i> 4.7 (1.4k)</div>
+                <div class="dest-price">₹14,999 <span>/ person</span></div>
+              </div>
+              <a href="#" class="dest-cta">Explore Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 15. Hampi -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="160">
+          <div class="dest-card">
+            <img src="https://images.pexels.com/photos/18320349/pexels-photo-18320349.jpeg?w=600&q=80" alt="Hampi" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-body">
+              <div class="dest-badge">Ancient Empire</div>
+              <div class="dest-name">Hampi</div>
+              <div class="dest-desc">Vijayanagara ruins, giant boulders, and UNESCO-listed medieval temples.</div>
+              <div class="dest-meta">
+                <div class="dest-rating"><i class="bi bi-star-fill"></i> 4.8 (1.1k)</div>
+                <div class="dest-price">₹12,999 <span>/ person</span></div>
+              </div>
+              <a href="#" class="dest-cta">Explore Now →</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ PARALLAX DIVIDER ══════════════════════ -->
+  <div class="parallax-divider"
+    style="background-image: url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1920&q=60')">
+    <div class="parallax-content">
+      <div data-aos="zoom-in">
+        <div class="label-tag mb-3">Our Promise</div>
+        <h2 class="section-title text-white">"Every Journey Tells <em class="gold-text">A Story"</em></h2>
+        <p class="text-white-50 mt-3" style="font-size:0.9rem;">Let us craft yours — one extraordinary destination at a
+          time.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════ INTERNATIONAL DESTINATIONS ══════════════════════ -->
+  <section id="intl-dest" class="section-pad">
+    <div class="container position-relative">
+      <div class="text-center mb-5" data-aos="fade-up">
+        <div class="label-tag"><i class="bi bi-globe2 me-1"></i> World Wonders</div>
+        <h2 class="section-title text-white">International <span class="gold-text">Destinations</span></h2>
+        <p class="text-white-50 mt-3" style="max-width:560px; margin:auto; font-size:0.88rem; line-height:1.8;">Iconic
+          cities and secret escapes across six continents, curated for the discerning explorer.</p>
+      </div>
+      <div class="row g-4">
+
+        <!-- Paris -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
+          <div class="dest-card">
+            <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=600&q=80" alt="Paris" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-body">
+              <div class="dest-badge">🇫🇷 France</div>
+              <div class="dest-name">Paris</div>
+              <div class="dest-desc">The City of Light — Eiffel Tower, Louvre, haute cuisine and Parisian romance.</div>
+              <div class="dest-meta">
+                <div class="dest-rating"><i class="bi bi-star-fill"></i> 4.9 (5.2k)</div>
+                <div class="dest-price">₹89,999 <span>/ person</span></div>
+              </div>
+              <a href="#" class="dest-cta">Explore Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dubai -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="80">
+          <div class="dest-card">
+            <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&q=80" alt="Dubai" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-body">
+              <div class="dest-badge">🇦🇪 UAE</div>
+              <div class="dest-name">Dubai</div>
+              <div class="dest-desc">Futuristic skyline, desert safaris, and ultra-luxury shopping experiences.</div>
+              <div class="dest-meta">
+                <div class="dest-rating"><i class="bi bi-star-fill"></i> 4.8 (4.7k)</div>
+                <div class="dest-price">₹65,999 <span>/ person</span></div>
+              </div>
+              <a href="#" class="dest-cta">Explore Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bali -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="160">
+          <div class="dest-card">
+            <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600&q=80" alt="Bali" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-body">
+              <div class="dest-badge">🇮🇩 Indonesia</div>
+              <div class="dest-name">Bali</div>
+              <div class="dest-desc">Terraced rice fields, sacred temples, surf breaks, and spiritual serenity.</div>
+              <div class="dest-meta">
+                <div class="dest-rating"><i class="bi bi-star-fill"></i> 4.9 (6.1k)</div>
+                <div class="dest-price">₹45,999 <span>/ person</span></div>
+              </div>
+              <a href="#" class="dest-cta">Explore Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Maldives -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
+          <div class="dest-card">
+            <img src="https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=600&q=80" alt="Maldives" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-body">
+              <div class="dest-badge">🇲🇻 Maldives</div>
+              <div class="dest-name">Maldives</div>
+              <div class="dest-desc">Overwater bungalows, bioluminescent beaches, and crystal-clear lagoons.</div>
+              <div class="dest-meta">
+                <div class="dest-rating"><i class="bi bi-star-fill"></i> 5.0 (3.8k)</div>
+                <div class="dest-price">₹1,10,999 <span>/ person</span></div>
+              </div>
+              <a href="#" class="dest-cta">Explore Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Singapore -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="80">
+          <div class="dest-card">
+            <img src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=600&q=80" alt="Singapore" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-body">
+              <div class="dest-badge">🇸🇬 Singapore</div>
+              <div class="dest-name">Singapore</div>
+              <div class="dest-desc">Gardens by the Bay, hawker culture, Marina Bay Sands, and lush greenery.</div>
+              <div class="dest-meta">
+                <div class="dest-rating"><i class="bi bi-star-fill"></i> 4.8 (3.2k)</div>
+                <div class="dest-price">₹72,999 <span>/ person</span></div>
+              </div>
+              <a href="#" class="dest-cta">Explore Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tokyo -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="160">
+          <div class="dest-card">
+            <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=80" alt="Tokyo" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-body">
+              <div class="dest-badge">🇯🇵 Japan</div>
+              <div class="dest-name">Tokyo</div>
+              <div class="dest-desc">Neon-lit Shibuya crossings, ancient Senso-ji, and unparalleled ramen culture.</div>
+              <div class="dest-meta">
+                <div class="dest-rating"><i class="bi bi-star-fill"></i> 4.9 (4.5k)</div>
+                <div class="dest-price">₹95,999 <span>/ person</span></div>
+              </div>
+              <a href="#" class="dest-cta">Explore Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- London -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
+          <div class="dest-card">
+            <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=600&q=80" alt="London" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-body">
+              <div class="dest-badge">🇬🇧 UK</div>
+              <div class="dest-name">London</div>
+              <div class="dest-desc">Buckingham Palace, the Thames, West End musicals and world-class museums.</div>
+              <div class="dest-meta">
+                <div class="dest-rating"><i class="bi bi-star-fill"></i> 4.8 (4.1k)</div>
+                <div class="dest-price">₹1,05,999 <span>/ person</span></div>
+              </div>
+              <a href="#" class="dest-cta">Explore Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bangkok -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="80">
+          <div class="dest-card">
+            <img src="https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=600&q=80" alt="Bangkok" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-body">
+              <div class="dest-badge">🇹🇭 Thailand</div>
+              <div class="dest-name">Bangkok</div>
+              <div class="dest-desc">Grand Palace, floating markets, street food paradise, and vibrant nightlife.</div>
+              <div class="dest-meta">
+                <div class="dest-rating"><i class="bi bi-star-fill"></i> 4.7 (3.6k)</div>
+                <div class="dest-price">₹38,999 <span>/ person</span></div>
+              </div>
+              <a href="#" class="dest-cta">Explore Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- New York -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="160">
+          <div class="dest-card">
+            <img src="https://images.unsplash.com/photo-1490644658840-3f2e3f8c5625?w=600&q=80" alt="New York" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-body">
+              <div class="dest-badge">🇺🇸 USA</div>
+              <div class="dest-name">New York</div>
+              <div class="dest-desc">Central Park, Times Square, Broadway shows, and the city that never sleeps.</div>
+              <div class="dest-meta">
+                <div class="dest-rating"><i class="bi bi-star-fill"></i> 4.8 (5.0k)</div>
+                <div class="dest-price">₹1,25,999 <span>/ person</span></div>
+              </div>
+              <a href="#" class="dest-cta">Explore Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Santorini -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
+          <div class="dest-card">
+            <img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=600&q=80" alt="Santorini" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-body">
+              <div class="dest-badge">🇬🇷 Greece</div>
+              <div class="dest-name">Santorini</div>
+              <div class="dest-desc">Whitewashed cliffside villages, volcanic sunsets, and Aegean Sea vistas.</div>
+              <div class="dest-meta">
+                <div class="dest-rating"><i class="bi bi-star-fill"></i> 4.9 (2.8k)</div>
+                <div class="dest-price">₹98,999 <span>/ person</span></div>
+              </div>
+              <a href="#" class="dest-cta">Explore Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Switzerland -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="80">
+          <div class="dest-card">
+            <img src="https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?w=600&q=80" alt="Switzerland" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-body">
+              <div class="dest-badge">🇨🇭 Switzerland</div>
+              <div class="dest-name">Switzerland</div>
+              <div class="dest-desc">Alpine meadows, the Matterhorn, chocolate, and scenic train journeys.</div>
+              <div class="dest-meta">
+                <div class="dest-rating"><i class="bi bi-star-fill"></i> 4.9 (2.5k)</div>
+                <div class="dest-price">₹1,45,999 <span>/ person</span></div>
+              </div>
+              <a href="#" class="dest-cta">Explore Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phuket -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="160">
+          <div class="dest-card">
+            <img src="https://images.unsplash.com/photo-1501436513145-30f24e19fcc8?w=600&q=80" alt="Phuket" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-body">
+              <div class="dest-badge">🇹🇭 Thailand</div>
+              <div class="dest-name">Phuket</div>
+              <div class="dest-desc">Andaman Sea jewel — limestone karsts, party beaches, and island-hopping bliss.
+              </div>
+              <div class="dest-meta">
+                <div class="dest-rating"><i class="bi bi-star-fill"></i> 4.7 (3.1k)</div>
+                <div class="dest-price">₹42,999 <span>/ person</span></div>
+              </div>
+              <a href="#" class="dest-cta">Explore Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mauritius -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
+          <div class="dest-card">
+            <img src="https://images.pexels.com/photos/11043356/pexels-photo-11043356.jpeg?w=600&q=80" alt="Mauritius" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-body">
+              <div class="dest-badge">🇲🇺 Mauritius</div>
+              <div class="dest-name">Mauritius</div>
+              <div class="dest-desc">Turquoise lagoons, underwater waterfall illusions, and luxury beachfront resorts.
+              </div>
+              <div class="dest-meta">
+                <div class="dest-rating"><i class="bi bi-star-fill"></i> 4.8 (1.9k)</div>
+                <div class="dest-price">₹85,999 <span>/ person</span></div>
+              </div>
+              <a href="#" class="dest-cta">Explore Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Amsterdam -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="80">
+          <div class="dest-card">
+            <img src="https://images.unsplash.com/photo-1534351590666-13e3e96b5017?w=600&q=80" alt="Amsterdam" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-body">
+              <div class="dest-badge">🇳🇱 Netherlands</div>
+              <div class="dest-name">Amsterdam</div>
+              <div class="dest-desc">Canal rings, tulip fields, world-class art museums, and bicycle culture.</div>
+              <div class="dest-meta">
+                <div class="dest-rating"><i class="bi bi-star-fill"></i> 4.7 (2.3k)</div>
+                <div class="dest-price">₹92,999 <span>/ person</span></div>
+              </div>
+              <a href="#" class="dest-cta">Explore Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kyoto -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="160">
+          <div class="dest-card">
+            <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=600&q=80" alt="Kyoto" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-body">
+              <div class="dest-badge">🇯🇵 Japan</div>
+              <div class="dest-name">Kyoto</div>
+              <div class="dest-desc">Geisha districts, thousands of torii gates, and cherry blossom tranquility.</div>
+              <div class="dest-meta">
+                <div class="dest-rating"><i class="bi bi-star-fill"></i> 4.9 (3.4k)</div>
+                <div class="dest-price">₹90,999 <span>/ person</span></div>
+              </div>
+              <a href="#" class="dest-cta">Explore Now →</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ WHY CHOOSE US ══════════════════════ -->
+  <section id="why" class="section-pad">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-5" data-aos="fade-right">
+          <div class="label-tag">Why WanderNext</div>
+          <h2 class="section-title text-white mb-4">Crafted For The <span class="gold-text">Discerning</span> Traveler
+          </h2>
+          <p class="text-white-50 mb-4" style="font-size:0.88rem; line-height:1.9;">We don't just book trips — we
+            architect transformative experiences. Our team of expert travel curators ensures every detail is perfect,
+            every moment is memorable.</p>
+          <a href="#packages" class="btn-gold"><span>View Our Packages</span></a>
+        </div>
+        <div class="col-lg-7">
+          <div class="row g-3">
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="0">
+              <div class="why-card">
+                <div class="why-icon"><i class="bi bi-shield-check"></i></div>
+                <div class="why-title">100% Safe &amp; Secure</div>
+                <div class="why-desc">IATA certified agency with full travel insurance coverage and 24/7 emergency
+                  support worldwide.</div>
+              </div>
+            </div>
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+              <div class="why-card">
+                <div class="why-icon"><i class="bi bi-headset"></i></div>
+                <div class="why-title">Dedicated Concierge</div>
+                <div class="why-desc">Personal travel concierge available round the clock to handle every aspect of your
+                  journey.</div>
+              </div>
+            </div>
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+              <div class="why-card">
+                <div class="why-icon"><i class="bi bi-currency-rupee"></i></div>
+                <div class="why-title">Best Price Guarantee</div>
+                <div class="why-desc">We match or beat any comparable quote. No hidden charges, complete transparency
+                  always.</div>
+              </div>
+            </div>
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+              <div class="why-card">
+                <div class="why-icon"><i class="bi bi-heart-fill"></i></div>
+                <div class="why-title">Tailored Experiences</div>
+                <div class="why-desc">Every itinerary is custom-built to your preferences, pace, and passions. Truly
+                  bespoke travel.</div>
+              </div>
+            </div>
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
+              <div class="why-card">
+                <div class="why-icon"><i class="bi bi-airplane-fill"></i></div>
+                <div class="why-title">Premium Partners</div>
+                <div class="why-desc">Exclusive partnerships with 5-star hotels, premium airlines, and luxury ground
+                  operators.</div>
+              </div>
+            </div>
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="500">
+              <div class="why-card">
+                <div class="why-icon"><i class="bi bi-leaf-fill"></i></div>
+                <div class="why-title">Responsible Tourism</div>
+                <div class="why-desc">Eco-conscious travel options that protect natural wonders for future generations.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ TRAVEL CATEGORIES ══════════════════════ -->
+  <section id="categories" class="section-pad">
+    <div class="container">
+      <div class="text-center mb-5" data-aos="fade-up">
+        <div class="label-tag">Explore By Style</div>
+        <h2 class="section-title text-white">Travel <span class="gold-text">Categories</span></h2>
+      </div>
+      <div class="row g-3">
+        <div class="col-6 col-md-4 col-lg-2" data-aos="fade-up" data-aos-delay="0">
+          <div class="cat-card">
+            <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&q=70" alt="Beach" />
+            <div class="cat-overlay">
+              <div class="cat-icon"><i class="bi bi-water"></i></div>
+              <div class="cat-name">Beach</div>
+              <div class="cat-count">42 Destinations</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2" data-aos="fade-up" data-aos-delay="80">
+          <div class="cat-card">
+            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&q=70" alt="Mountain" />
+            <div class="cat-overlay">
+              <div class="cat-icon"><i class="bi bi-triangle"></i></div>
+              <div class="cat-name">Mountains</div>
+              <div class="cat-count">38 Destinations</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2" data-aos="fade-up" data-aos-delay="160">
+          <div class="cat-card">
+            <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=400&q=70" alt="Luxury" />
+            <div class="cat-overlay">
+              <div class="cat-icon"><i class="bi bi-gem"></i></div>
+              <div class="cat-name">Luxury</div>
+              <div class="cat-count">25 Destinations</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2" data-aos="fade-up" data-aos-delay="240">
+          <div class="cat-card">
+            <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=400&q=70" alt="Adventure" />
+            <div class="cat-overlay">
+              <div class="cat-icon"><i class="bi bi-lightning-fill"></i></div>
+              <div class="cat-name">Adventure</div>
+              <div class="cat-count">56 Destinations</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2" data-aos="fade-up" data-aos-delay="320">
+          <div class="cat-card">
+            <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?w=400&q=70" alt="Cultural" />
+            <div class="cat-overlay">
+              <div class="cat-icon"><i class="bi bi-building-fill"></i></div>
+              <div class="cat-name">Cultural</div>
+              <div class="cat-count">33 Destinations</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2" data-aos="fade-up" data-aos-delay="400">
+          <div class="cat-card">
+            <img src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=400&q=70" alt="Honeymoon" />
+            <div class="cat-overlay">
+              <div class="cat-icon"><i class="bi bi-heart-fill"></i></div>
+              <div class="cat-name">Honeymoon</div>
+              <div class="cat-count">29 Destinations</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ SPECIAL PACKAGES ══════════════════════ -->
+  <section id="packages" class="section-pad">
+    <div class="container">
+      <div class="text-center mb-5" data-aos="fade-up">
+        <div class="label-tag">Curated Journeys</div>
+        <h2 class="section-title text-white">Special Tour <span class="gold-text">Packages</span></h2>
+        <p class="text-white-50 mt-3" style="max-width:560px; margin:auto; font-size:0.88rem; line-height:1.8;">
+          Hand-picked itineraries blending iconic landmarks with hidden local gems.</p>
+      </div>
+      <div class="row g-4">
+
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
+          <div class="pkg-card">
+            <div class="pkg-img">
+              <img src="https://images.unsplash.com/photo-1548013146-72479768bada?w=600&q=80" alt="Kashmir" />
+              <div class="pkg-badge">Best Seller</div>
+            </div>
+            <div class="pkg-body">
+              <div class="pkg-name">Golden Kashmir &amp; Ladakh</div>
+              <div class="pkg-meta">
+                <span><i class="bi bi-calendar3"></i> 8 Days / 7 Nights</span>
+                <span><i class="bi bi-geo-alt"></i> India</span>
+                <span><i class="bi bi-people"></i> 2–10 Pax</span>
+              </div>
+              <ul class="pkg-features">
+                <li>Dal Lake Shikara &amp; Houseboat Stay</li>
+                <li>Pangong Tso Camping Experience</li>
+                <li>Gulmarg Gondola Ride</li>
+                <li>All Meals &amp; Internal Transfers</li>
+              </ul>
+              <div class="pkg-footer">
+                <div class="pkg-price">₹32,999<small>per person</small></div>
+                <a href="#" class="dest-cta" style="width:auto; padding: 9px 18px;">Book Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="pkg-card">
+            <div class="pkg-img">
+              <img src="https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=600&q=80" alt="Maldives" />
+              <div class="pkg-badge">Luxury</div>
+            </div>
+            <div class="pkg-body">
+              <div class="pkg-name">Maldives Overwater Escape</div>
+              <div class="pkg-meta">
+                <span><i class="bi bi-calendar3"></i> 6 Days / 5 Nights</span>
+                <span><i class="bi bi-geo-alt"></i> Maldives</span>
+                <span><i class="bi bi-people"></i> Couples</span>
+              </div>
+              <ul class="pkg-features">
+                <li>Overwater Villa with Pool</li>
+                <li>Sunset Dolphin Cruise</li>
+                <li>Private Snorkelling &amp; Spa</li>
+                <li>All-Inclusive Meals</li>
+              </ul>
+              <div class="pkg-footer">
+                <div class="pkg-price">₹1,15,999<small>per couple</small></div>
+                <a href="#" class="dest-cta" style="width:auto; padding: 9px 18px;">Book Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="pkg-card">
+            <div class="pkg-img">
+              <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600&q=80" alt="Bali" />
+              <div class="pkg-badge">Popular</div>
+            </div>
+            <div class="pkg-body">
+              <div class="pkg-name">Bali Bliss &amp; Temples</div>
+              <div class="pkg-meta">
+                <span><i class="bi bi-calendar3"></i> 7 Days / 6 Nights</span>
+                <span><i class="bi bi-geo-alt"></i> Bali</span>
+                <span><i class="bi bi-people"></i> 2–6 Pax</span>
+              </div>
+              <ul class="pkg-features">
+                <li>Ubud Rice Terrace Walk</li>
+                <li>Tegallalang &amp; Tanah Lot</li>
+                <li>Balinese Cooking Class</li>
+                <li>Airport Transfers &amp; Hotels</li>
+              </ul>
+              <div class="pkg-footer">
+                <div class="pkg-price">₹52,999<small>per person</small></div>
+                <a href="#" class="dest-cta" style="width:auto; padding: 9px 18px;">Book Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
+          <div class="pkg-card">
+            <div class="pkg-img">
+              <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=600&q=80" alt="Europe" />
+              <div class="pkg-badge">Grand Tour</div>
+            </div>
+            <div class="pkg-body">
+              <div class="pkg-name">European Grand Circuit</div>
+              <div class="pkg-meta">
+                <span><i class="bi bi-calendar3"></i> 14 Days</span>
+                <span><i class="bi bi-geo-alt"></i> 5 Countries</span>
+                <span><i class="bi bi-people"></i> Groups</span>
+              </div>
+              <ul class="pkg-features">
+                <li>Paris → Amsterdam → Rome</li>
+                <li>Swiss Alps Day Trip</li>
+                <li>All Hotels &amp; Rail Passes</li>
+                <li>Expert Tour Manager</li>
+              </ul>
+              <div class="pkg-footer">
+                <div class="pkg-price">₹1,85,999<small>per person</small></div>
+                <a href="#" class="dest-cta" style="width:auto; padding: 9px 18px;">Book Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="pkg-card">
+            <div class="pkg-img">
+              <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&q=80" alt="Dubai" />
+              <div class="pkg-badge">Flash Sale</div>
+            </div>
+            <div class="pkg-body">
+              <div class="pkg-name">Dubai Glam &amp; Desert</div>
+              <div class="pkg-meta">
+                <span><i class="bi bi-calendar3"></i> 5 Days / 4 Nights</span>
+                <span><i class="bi bi-geo-alt"></i> Dubai</span>
+                <span><i class="bi bi-people"></i> All Groups</span>
+              </div>
+              <ul class="pkg-features">
+                <li>Burj Khalifa Sky View</li>
+                <li>Desert Safari &amp; BBQ Dinner</li>
+                <li>Dubai Mall &amp; Fountain Show</li>
+                <li>5★ Hotel Stay</li>
+              </ul>
+              <div class="pkg-footer">
+                <div class="pkg-price">₹68,999<small>per person</small></div>
+                <a href="#" class="dest-cta" style="width:auto; padding: 9px 18px;">Book Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="pkg-card">
+            <div class="pkg-img">
+              <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=600&q=80" alt="Kerala" />
+              <div class="pkg-badge">Wellness</div>
+            </div>
+            <div class="pkg-body">
+              <div class="pkg-name">Kerala Ayurvedic Retreat</div>
+              <div class="pkg-meta">
+                <span><i class="bi bi-calendar3"></i> 6 Days / 5 Nights</span>
+                <span><i class="bi bi-geo-alt"></i> Kerala</span>
+                <span><i class="bi bi-people"></i> Couples / Solo</span>
+              </div>
+              <ul class="pkg-features">
+                <li>Alleppey Houseboat Stay</li>
+                <li>Ayurvedic Spa &amp; Yoga</li>
+                <li>Munnar Tea Estates Tour</li>
+                <li>All Meals Included</li>
+              </ul>
+              <div class="pkg-footer">
+                <div class="pkg-price">₹24,999<small>per person</small></div>
+                <a href="#" class="dest-cta" style="width:auto; padding: 9px 18px;">Book Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ TESTIMONIALS ══════════════════════ -->
+  <section id="testimonials" class="section-pad">
+    <div class="container">
+      <div class="text-center mb-5" data-aos="fade-up">
+        <div class="label-tag">Traveler Stories</div>
+        <h2 class="section-title text-white">What Our Guests <span class="gold-text">Say</span></h2>
+      </div>
+      <div class="swiper testiSwiper" data-aos="fade-up">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="testi-card">
+              <div class="testi-quote"><i class="bi bi-quote"></i></div>
+              <div class="testi-text">"WanderNext turned our anniversary trip into the most magical experience of our
+                lives. The Maldives overwater villa, private sunset dinner on the sandbank — every detail was flawlessly
+                arranged."</div>
+              <div class="testi-stars">★★★★★</div>
+              <div class="testi-author">
+                <img src="https://i.pravatar.cc/150?img=47" alt="Priya" class="testi-avatar" />
+                <div>
+                  <div class="testi-name">Priya &amp; Rohan Sharma</div>
+                  <div class="testi-dest"><i class="bi bi-geo-alt me-1"></i>Maldives Escape</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="testi-card">
+              <div class="testi-quote"><i class="bi bi-quote"></i></div>
+              <div class="testi-text">"Our Ladakh motorbike expedition was truly epic. The team handled every permit,
+                every campsite, every meal. All we had to do was ride and soak in the breathtaking landscapes."</div>
+              <div class="testi-stars">★★★★★</div>
+              <div class="testi-author">
+                <img src="https://i.pravatar.cc/150?img=12" alt="Arjun" class="testi-avatar" />
+                <div>
+                  <div class="testi-name">Arjun Mehta</div>
+                  <div class="testi-dest"><i class="bi bi-geo-alt me-1"></i>Leh Ladakh Adventure</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="testi-card">
+              <div class="testi-quote"><i class="bi bi-quote"></i></div>
+              <div class="testi-text">"Five European countries in 14 days and not a single hiccup! The tour manager was
+                incredibly knowledgeable. The Paris hotel they chose had a stunning Eiffel Tower view. Worth every
+                rupee."</div>
+              <div class="testi-stars">★★★★★</div>
+              <div class="testi-author">
+                <img src="https://i.pravatar.cc/150?img=32" alt="Kavitha" class="testi-avatar" />
+                <div>
+                  <div class="testi-name">Kavitha Nair</div>
+                  <div class="testi-dest"><i class="bi bi-geo-alt me-1"></i>European Grand Circuit</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="testi-card">
+              <div class="testi-quote"><i class="bi bi-quote"></i></div>
+              <div class="testi-text">"Booked the Kerala Ayurvedic retreat for my parents' 30th anniversary. My mother
+                still talks about those five days. The houseboat, the massages, the food — absolutely divine
+                hospitality."</div>
+              <div class="testi-stars">★★★★★</div>
+              <div class="testi-author">
+                <img src="https://i.pravatar.cc/150?img=56" alt="Sahil" class="testi-avatar" />
+                <div>
+                  <div class="testi-name">Sahil &amp; Family</div>
+                  <div class="testi-dest"><i class="bi bi-geo-alt me-1"></i>Kerala Wellness</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="testi-card">
+              <div class="testi-quote"><i class="bi bi-quote"></i></div>
+              <div class="testi-text">"Bali with WanderNext was beyond expectations. Our guide Ketut knew every hidden
+                waterfall and warung. The cooking class at sunrise was pure magic. Already planning our next trip with
+                them!"</div>
+              <div class="testi-stars">★★★★★</div>
+              <div class="testi-author">
+                <img src="https://i.pravatar.cc/150?img=44" alt="Ananya" class="testi-avatar" />
+                <div>
+                  <div class="testi-name">Ananya Krishnan</div>
+                  <div class="testi-dest"><i class="bi bi-geo-alt me-1"></i>Bali Bliss</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-pagination mt-4"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ GALLERY ══════════════════════ -->
+  <section id="gallery" class="section-pad">
+    <div class="container">
+      <div class="text-center mb-5" data-aos="fade-up">
+        <div class="label-tag">Visual Journey</div>
+        <h2 class="section-title text-white">Travel <span class="gold-text">Gallery</span></h2>
+      </div>
+      <div class="gallery-grid" data-aos="fade-up">
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=800&q=80" alt="Maldives" />
+          <div class="gallery-overlay"><i class="bi bi-zoom-in gallery-zoom"></i></div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=500&q=80" alt="Ladakh" />
+          <div class="gallery-overlay"><i class="bi bi-zoom-in gallery-zoom"></i></div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=500&q=80" alt="Santorini" />
+          <div class="gallery-overlay"><i class="bi bi-zoom-in gallery-zoom"></i></div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=500&q=80" alt="Tokyo" />
+          <div class="gallery-overlay"><i class="bi bi-zoom-in gallery-zoom"></i></div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=800&q=80" alt="Goa" />
+          <div class="gallery-overlay"><i class="bi bi-zoom-in gallery-zoom"></i></div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=500&q=80" alt="Kerala" />
+          <div class="gallery-overlay"><i class="bi bi-zoom-in gallery-zoom"></i></div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=500&q=80" alt="Bali" />
+          <div class="gallery-overlay"><i class="bi bi-zoom-in gallery-zoom"></i></div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=500&q=80" alt="London" />
+          <div class="gallery-overlay"><i class="bi bi-zoom-in gallery-zoom"></i></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ FAQ ══════════════════════ -->
+  <section id="faq" class="section-pad">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="text-center mb-5" data-aos="fade-up">
+            <div class="label-tag">Got Questions?</div>
+            <h2 class="section-title text-white">Frequently Asked <span class="gold-text">Questions</span></h2>
+          </div>
+          <div class="accordion" id="faqAccordion" data-aos="fade-up">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                  How do I book a tour package with WanderNext?
+                </button>
+              </h2>
+              <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">Simply browse our packages, click "Book Now", and fill in your travel
+                  details. Our travel expert will contact you within 2 hours to confirm availability and customize your
+                  itinerary. A 25% deposit secures your booking.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#faq2">
+                  Are your packages customizable for solo travelers?
+                </button>
+              </h2>
+              <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">Absolutely! Every package on WanderNext can be tailored for solo travelers,
+                  couples, families, or groups. Solo packages come with a dedicated guide and community travel options
+                  to connect with like-minded explorers.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#faq3">
+                  What is your cancellation and refund policy?
+                </button>
+              </h2>
+              <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">Cancellations made 30+ days before departure receive a full refund minus
+                  processing fees. 15–29 days: 50% refund. Under 15 days: no refund, but we offer free rescheduling
+                  within 12 months for most packages.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#faq4">
+                  Do you provide travel insurance?
+                </button>
+              </h2>
+              <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">Yes! We partner with leading insurers to offer comprehensive travel
+                  insurance covering medical emergencies, trip cancellation, lost baggage, and flight delays. Insurance
+                  can be added at checkout at very competitive rates.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#faq5">
+                  What documents are required for international tours?
+                </button>
+              </h2>
+              <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">Requirements vary by destination. Our visa assistance team handles all
+                  paperwork including visa applications, travel insurance documentation, hotel vouchers, and flight
+                  itineraries. We provide a complete checklist once your booking is confirmed.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#faq6">
+                  Is there 24/7 support during the trip?
+                </button>
+              </h2>
+              <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">Yes — every booking includes access to our 24/7 emergency hotline, a
+                  dedicated WhatsApp support group, and on-ground local coordinators at each destination. You're never
+                  alone, no matter where in the world you are.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ NEWSLETTER ══════════════════════ -->
+  <section id="newsletter">
+    <div class="container">
+      <div class="newsletter-box" data-aos="zoom-in">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-6">
+            <div class="label-tag">Stay Inspired</div>
+            <h2 class="section-title text-white mb-3">Get Exclusive <span class="gold-text">Travel Deals</span></h2>
+            <p class="text-white-50" style="font-size:0.85rem; line-height:1.8;">Subscribe to receive curated
+              itineraries, flash sales, and insider travel tips directly to your inbox. Join 45,000+ globetrotters.</p>
+          </div>
+          <div class="col-lg-6">
+            <div class="d-flex gap-3 flex-wrap">
+              <input type="email" class="newsletter-input" placeholder="Enter your email address" />
+              <button class="btn-gold"><span><i class="bi bi-send me-1"></i> Subscribe</span></button>
+            </div>
+            <p class="text-white-50 mt-3" style="font-size:0.72rem;"><i class="bi bi-shield-check me-1 text-gold"
+                style="color:var(--gold)"></i> No spam. Unsubscribe anytime. We respect your privacy.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ FOOTER ══════════════════════ -->
+  <footer id="footer">
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-lg-4 col-md-6">
+          <div class="footer-brand">Wander<span>Next</span></div>
+          <p class="footer-desc">Crafting extraordinary travel experiences since 2015. Your journey, our obsession. IATA
+            certified. ISO 9001:2015.</p>
+          <div class="footer-socials">
+            <a href="#"><i class="bi bi-facebook"></i></a>
+            <a href="#"><i class="bi bi-instagram"></i></a>
+            <a href="#"><i class="bi bi-twitter-x"></i></a>
+            <a href="#"><i class="bi bi-youtube"></i></a>
+            <a href="#"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+          <div class="footer-heading">Quick Links</div>
+          <ul class="footer-links">
+            <li><a href="#hero"><i class="bi bi-chevron-right"></i> Home</a></li>
+            <li><a href="#indian-dest"><i class="bi bi-chevron-right"></i> India Tours</a></li>
+            <li><a href="#intl-dest"><i class="bi bi-chevron-right"></i> International</a></li>
+            <li><a href="#packages"><i class="bi bi-chevron-right"></i> Packages</a></li>
+            <li><a href="#why"><i class="bi bi-chevron-right"></i> About Us</a></li>
+            <li><a href="#faq"><i class="bi bi-chevron-right"></i> FAQ</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6">
+          <div class="footer-heading">Destinations</div>
+          <ul class="footer-links">
+            <li><a href="#"><i class="bi bi-chevron-right"></i> Kashmir</a></li>
+            <li><a href="#"><i class="bi bi-chevron-right"></i> Maldives</a></li>
+            <li><a href="#"><i class="bi bi-chevron-right"></i> Bali</a></li>
+            <li><a href="#"><i class="bi bi-chevron-right"></i> Paris</a></li>
+            <li><a href="#"><i class="bi bi-chevron-right"></i> Tokyo</a></li>
+            <li><a href="#"><i class="bi bi-chevron-right"></i> Dubai</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="footer-heading">Get In Touch</div>
+          <div class="footer-contact">
+            <i class="bi bi-geo-alt-fill"></i>
+            <span>WanderNext House, 12 Travel Lane, MG Road, Bengaluru – 560001, India</span>
+          </div>
+          <div class="footer-contact">
+            <i class="bi bi-telephone-fill"></i>
+            <span>+91 98765 43210 &nbsp;|&nbsp; +91 80 2200 1100</span>
+          </div>
+          <div class="footer-contact">
+            <i class="bi bi-envelope-fill"></i>
+            <span>hello@wandernext.in</span>
+          </div>
+          <div class="footer-contact">
+            <i class="bi bi-clock-fill"></i>
+            <span>Mon – Sat: 9AM – 7PM IST &nbsp;|&nbsp; Sun: 10AM – 4PM</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-6 text-md-start">© 2026 WanderNext. All Rights Reserved. | IATA Accredited Agency</div>
+          <div class="col-md-6 text-md-end mt-2 mt-md-0">
+            <a href="#">Privacy Policy</a> &nbsp;·&nbsp;
+            <a href="#">Terms of Service</a> &nbsp;·&nbsp;
+            <a href="#">Sitemap</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ══════════════════════ SCRIPTS ══════════════════════ -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+  <script>
+    // Page Loader + AOS Init (both run after all scripts are loaded)
+    window.addEventListener('load', () => {
+      // Hide loader
+      setTimeout(() => {
+        document.getElementById('pageLoader').classList.add('hide');
+      }, 900);
+
+      // AOS — must init after aos.js is fully loaded
+      if (typeof AOS !== 'undefined') {
+        AOS.init({ duration: 700, once: true, offset: 60, easing: 'ease-out-cubic' });
+      }
+    });
+
+    // Navbar scroll effect
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+      const btn = document.getElementById('backToTop');
+      btn.classList.toggle('show', window.scrollY > 400);
+    });
+
+    // Back to top
+    document.getElementById('backToTop').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Testimonials Swiper
+    new Swiper('.testiSwiper', {
+      slidesPerView: 1,
+      spaceBetween: 24,
+      loop: true,
+      autoplay: { delay: 4500, disableOnInteraction: false },
+      navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+      pagination: { el: '.swiper-pagination', clickable: true },
+      breakpoints: {
+        768: { slidesPerView: 2 },
+        1024: { slidesPerView: 3 }
+      }
+    });
+
+    // Animated counters
+    function animateCounter(el, target, suffix = '') {
+      let start = 0;
+      const dur = 2000;
+      const step = target / (dur / 16);
+      const timer = setInterval(() => {
+        start += step;
+        if (start >= target) { start = target; clearInterval(timer); }
+        el.textContent = Math.floor(start).toLocaleString('en-IN') + suffix;
+      }, 16);
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          document.querySelectorAll('.stat-big').forEach(el => {
+            const text = el.textContent;
+            const num = parseInt(text.replace(/[^0-9]/g, ''));
+            const suffix = text.replace(/[0-9,]/g, '');
+            animateCounter(el, num, suffix);
+          });
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+
+    const statsSection = document.querySelector('#stats');
+    if (statsSection) observer.observe(statsSection);
+
+    // Search form notification
+    document.querySelector('.search-btn').addEventListener('click', () => {
+      const dest = document.querySelectorAll('.search-field')[0].value;
+      if (!dest.trim()) {
+        document.querySelectorAll('.search-field')[0].focus();
+        return;
+      }
+      alert('🌍 Searching for "' + dest + '" — Our expert will contact you shortly!');
+    });
+
+    // Newsletter
+    document.querySelector('#newsletter .btn-gold').addEventListener('click', () => {
+      const email = document.querySelector('.newsletter-input').value;
+      if (!email || !email.includes('@')) {
+        document.querySelector('.newsletter-input').focus();
+        return;
+      }
+      document.querySelector('.newsletter-input').value = '';
+      alert('🎉 Welcome to WanderNext! Check your inbox for exclusive deals.');
+    });
+  </script>
+</body>
+
+</html>
