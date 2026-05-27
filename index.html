@@ -234,7 +234,8 @@
 
     .btn-gold:hover {
       transform: translateY(-3px);
-      box-shadow: 0 12px 35px rgba(201, 168, 76, 0.5); /* Enhanced shadow */
+      box-shadow: 0 12px 35px rgba(201, 168, 76, 0.5);
+      /* Enhanced shadow */
     }
 
     .btn-gold:hover::before {
@@ -264,7 +265,8 @@
       background: rgba(255, 255, 255, 0.1);
       border-color: var(--white);
       transform: translateY(-3px);
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3); /* Added shadow */
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+      /* Added shadow */
     }
 
     /* ─── GLASS CARD ─── */
@@ -912,14 +914,25 @@
       gap: 12px;
     }
 
+    .gallery-item {
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+
     .gallery-item:nth-child(1) {
       grid-column: 1/3;
+      /* Restored original property */
       grid-row: 1/2;
+      /* Restored original property */
     }
 
     .gallery-item:nth-child(5) {
       grid-column: 3/5;
+      /* Restored original property */
       grid-row: 2/3;
+      /* Restored original property */
     }
 
     .gallery-item img {
@@ -1230,21 +1243,35 @@
       -webkit-animation: blink 0.7s infinite;
       -moz-animation: blink 0.7s infinite;
       animation: blink 0.7s infinite;
-      color: var(--gold); /* Match the gold text */
+      color: var(--gold);
+      /* Match the gold text */
     }
+
     @keyframes blink {
-      0% { opacity: 1; }
-      50% { opacity: 0; }
-      100% { opacity: 1; }
+      0% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
     }
 
     /* Hero Description Typography */
     .hero-description-typo {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.2rem; /* Slightly larger for emphasis */
-      font-weight: 400; /* Adjust weight if needed */
-      font-style: italic; /* Adding italic for a more "typographic" feel */
-      color: rgba(255, 255, 255, 0.8); /* Slightly less transparent than text-white-50 */
+      font-size: 1.2rem;
+      /* Slightly larger for emphasis */
+      font-weight: 400;
+      /* Adjust weight if needed */
+      font-style: italic;
+      /* Adding italic for a more "typographic" feel */
+      color: rgba(255, 255, 255, 0.8);
+      /* Slightly less transparent than text-white-50 */
     }
 
     /* ─── RESPONSIVE ─── */
@@ -1736,7 +1763,7 @@
             </div>
           </div>
         </div>
-        
+
         <!-- 15. Hampi -->
         <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="160">
           <div class="dest-card">
@@ -2003,7 +2030,8 @@
         <!-- Mauritius -->
         <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="0">
           <div class="dest-card">
-            <img src="https://images.pexels.com/photos/11043356/pexels-photo-11043356.jpeg?w=600&q=80" alt="Mauritius" />
+            <img src="https://images.pexels.com/photos/11043356/pexels-photo-11043356.jpeg?w=600&q=80"
+              alt="Mauritius" />
             <div class="dest-card-overlay"></div>
             <div class="dest-card-body">
               <div class="dest-badge">🇲🇺 Mauritius</div>
@@ -2072,7 +2100,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </section>
@@ -2390,7 +2417,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
           <div class="pkg-card">
             <div class="pkg-img">
