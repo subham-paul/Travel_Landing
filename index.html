@@ -20,6 +20,8 @@
   <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet" />
   <!-- AOS -->
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <!-- Typed.js -->
+  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
 
   <style>
     :root {
@@ -232,7 +234,7 @@
 
     .btn-gold:hover {
       transform: translateY(-3px);
-      box-shadow: 0 12px 35px rgba(201, 168, 76, 0.5);
+      box-shadow: 0 12px 35px rgba(201, 168, 76, 0.5); /* Enhanced shadow */
     }
 
     .btn-gold:hover::before {
@@ -262,6 +264,7 @@
       background: rgba(255, 255, 255, 0.1);
       border-color: var(--white);
       transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3); /* Added shadow */
     }
 
     /* ─── GLASS CARD ─── */
@@ -1228,6 +1231,29 @@
       text-align: center;
     }
 
+    /* Typed.js cursor style */
+    .typed-cursor {
+      opacity: 1;
+      -webkit-animation: blink 0.7s infinite;
+      -moz-animation: blink 0.7s infinite;
+      animation: blink 0.7s infinite;
+      color: var(--gold); /* Match the gold text */
+    }
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    /* Hero Description Typography */
+    .hero-description-typo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; /* Slightly larger for emphasis */
+      font-weight: 400; /* Adjust weight if needed */
+      font-style: italic; /* Adding italic for a more "typographic" feel */
+      color: rgba(255, 255, 255, 0.8); /* Slightly less transparent than text-white-50 */
+    }
+
     /* ─── RESPONSIVE ─── */
     @media (max-width: 992px) {
       .floating-stats {
@@ -1358,17 +1384,17 @@
   <section id="hero">
     <div class="container position-relative">
       <div class="row align-items-center min-vh-100 py-5">
-        <div class="col-lg-8">
-          <div class="hero-badge"><span class="dot"></span> Premium Travel Experiences Since 2015</div>
+        <div class="col-lg-12 text-center"> <!-- Changed to col-lg-12 and added text-center -->
+          <div class="hero-badge mx-auto"><span class="dot"></span> Premium Travel Experiences Since 2015</div>
           <h1 class="display-title text-white mb-3">
             Explore The World's<br>
-            <em class="gold-text">Hidden Wonders</em>
+            <span class="gold-text" id="typed-text"></span> <!-- Typing effect placeholder -->
           </h1>
-          <p class="text-white-50 mb-4" style="font-size:1rem; line-height:1.8; max-width:520px;">
+          <p class="text-white-50 mb-4 mx-auto hero-description-typo" style="line-height:1.8; max-width:520px;">
             Curated luxury journeys to the most extraordinary destinations on Earth. Where every voyage becomes a
             timeless story.
           </p>
-          <div class="d-flex gap-3 flex-wrap">
+          <div class="d-flex gap-3 flex-wrap justify-content-center"> <!-- Added justify-content-center -->
             <a href="#packages" class="btn-gold"><span>Explore Packages <i
                   class="bi bi-arrow-right ms-1"></i></span></a>
             <a href="#gallery" class="btn-outline-light-custom">View Gallery</a>
@@ -1537,7 +1563,7 @@
         <!-- 6. Shimla -->
         <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="160">
           <div class="dest-card">
-            <img src="https://images.pexels.com/photos/32464426/pexels-photo-32464426.jpeg?w=600&q=80" alt="Shimla" />
+            <img src="https://images.pexels.com/photos/32464426/pexels-photo-32464426.jpeg" alt="Shimla" />
             <div class="dest-card-overlay"></div>
             <div class="dest-card-body">
               <div class="dest-badge">Queen of Hills</div>
@@ -2079,7 +2105,7 @@
             </div>
             <div class="col-md-6" data-aos="fade-up" data-aos-delay="500">
               <div class="why-card">
-                <div class="why-icon"><i class="bi bi-leaf-fill"></i></div>
+                <div class="why-icon"><i class="bi bi-tree-fill"></i></div>
                 <div class="why-title">Responsible Tourism</div>
                 <div class="why-desc">Eco-conscious travel options that protect natural wonders for future generations.
                 </div>
@@ -2476,6 +2502,14 @@
           <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=500&q=80" alt="London" />
           <div class="gallery-overlay"><i class="bi bi-zoom-in gallery-zoom"></i></div>
         </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=500&q=80" alt="Bali" />
+          <div class="gallery-overlay"><i class="bi bi-zoom-in gallery-zoom"></i></div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=500&q=80" alt="London" />
+          <div class="gallery-overlay"><i class="bi bi-zoom-in gallery-zoom"></i></div>
+        </div>
       </div>
     </div>
   </section>
@@ -2609,7 +2643,6 @@
             <a href="#"><i class="bi bi-facebook"></i></a>
             <a href="#"><i class="bi bi-instagram"></i></a>
             <a href="#"><i class="bi bi-twitter-x"></i></a>
-            <a href="#"><i class="bi bi-youtube"></i></a>
             <a href="#"><i class="bi bi-linkedin"></i></a>
           </div>
         </div>
@@ -2765,6 +2798,20 @@
       document.querySelector('.newsletter-input').value = '';
       alert('🎉 Welcome to WanderNext! Check your inbox for exclusive deals.');
     });
+
+    // Typed.js for hero section
+    if (document.getElementById('typed-text')) {
+      new Typed('#typed-text', {
+        strings: ["Hidden Wonders", "Discover yourself", "Scuba dive coral reefs", "Hidden Mountain Cabins"],
+        typeSpeed: 70,
+        backSpeed: 40,
+        loop: true,
+        showCursor: true,
+        cursorChar: '|',
+        autoInsertCss: true,
+        bindInputFocusEvents: true,
+      });
+    }
   </script>
 </body>
 
